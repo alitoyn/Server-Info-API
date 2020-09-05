@@ -7,6 +7,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('../secrets.js');
+const { rootStorage } = require('./functions.js');
 
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
@@ -28,11 +29,6 @@ const checkJwt = jwt({
 // defining the Express app
 const app = express();
 
-// defining an array to work as the database (temporary solution)
-const ads = [
-  {title: 'Hello, world!'}
-];
-
 // adding Helmet to enhance your API's security
 app.use(helmet());
 
@@ -48,8 +44,8 @@ app.use(morgan('combined'));
 app.use(checkJwt);
 
 // defining an endpoint to return all ads
-app.get('/', (req, res) => {
-  res.send(ads);
+app.get('/rootStorage', (req, res) => {
+  res.send(rootStorage());
 });
 
 // starting the server
