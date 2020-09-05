@@ -18,10 +18,16 @@ function updates() {
   return data;
 }
 
+function hostname() {
+  let data = shell.exec('hostname');
+  return data;
+}
+
 if (typeof module !== 'undefined') {
     module.exports = {
       rootStorage,
       uptime,
       updates,
+      hostname,
     };
   }
