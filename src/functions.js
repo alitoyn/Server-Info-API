@@ -8,8 +8,13 @@ function rootStorage() {
   return data;
 }
 
-function uptime(){
+function uptime() {
   let data = shell.exec('uptime');
+  return data;
+}
+
+function updates() {
+  let data = shell.exec('apt-get upgrade --dry-run | grep "newly install"');
   return data;
 }
 
@@ -17,5 +22,6 @@ if (typeof module !== 'undefined') {
     module.exports = {
       rootStorage,
       uptime,
+      updates,
     };
   }

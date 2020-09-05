@@ -7,7 +7,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('../secrets.js');
-const { rootStorage, uptime } = require('./functions.js');
+const { rootStorage, uptime, updates, } = require('./functions.js');
 
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
@@ -50,7 +50,11 @@ app.get('/rootStorage', (req, res) => {
 
 app.get('/uptime', (req, res) => {
     res.send(uptime());
-  });
+});
+
+app.get('/updates', (req, res) => {
+    res.send(updates());
+});
 
 // starting the server
 app.listen(3001, () => {
