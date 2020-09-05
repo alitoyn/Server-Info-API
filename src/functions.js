@@ -8,8 +8,14 @@ function rootStorage() {
   return data;
 }
 
+function uptime(){
+  let data = shell.exec('uptime');
+  return data;
+}
+
 if (typeof module !== 'undefined') {
     module.exports = {
       rootStorage,
+      uptime,
     };
   }

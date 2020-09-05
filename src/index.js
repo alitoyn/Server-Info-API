@@ -7,7 +7,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('../secrets.js');
-const { rootStorage } = require('./functions.js');
+const { rootStorage, uptime } = require('./functions.js');
 
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
@@ -43,10 +43,14 @@ app.use(morgan('combined'));
 
 app.use(checkJwt);
 
-// defining an endpoint to return all ads
+// defining an endpoints
 app.get('/rootStorage', (req, res) => {
   res.send(rootStorage());
 });
+
+app.get('/uptime', (req, res) => {
+    res.send(uptime());
+  });
 
 // starting the server
 app.listen(3001, () => {
