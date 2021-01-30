@@ -1,4 +1,5 @@
 secrets.*
+secrets/
 test/
 # Logs
 logs

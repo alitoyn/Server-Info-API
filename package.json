@@ -18,13 +18,17 @@
   },
   "homepage": "https://github.com/alitoyn/Server-Info-API#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "helmet": "^4.1.0",
     "jwks-rsa": "^1.9.0",
     "morgan": "^1.10.0",
-    "shelljs": "^0.8.4"
+    "randomstring": "^1.1.5",
+    "shelljs": "^0.8.4",
+    "ssl-key-match": "0.0.4"
   }
 }

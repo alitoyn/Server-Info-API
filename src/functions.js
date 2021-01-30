@@ -1,3 +1,6 @@
+const ssl = require('ssl-key-match');
+const fs = require('fs')
+
 const shell = require('shelljs');
 
 function rootStorage() {
@@ -23,11 +26,24 @@ function hostname() {
   return data;
 }
 
+const verifyCert = (certPem) => {
+  const keyPem = fs.readFileSync('./secrets/server.key');
+
+  return ssl.match(certPem, keyPem, function (err, matches) {
+    if (matches) {
+      return true;
+    } else {
+      return false
+    }
+  });
+}
+
 if (typeof module !== 'undefined') {
-    module.exports = {
-      rootStorage,
-      uptime,
-      updates,
-      hostname,
-    };
-  }
+  module.exports = {
+    rootStorage,
+    uptime,
+    updates,
+    hostname,
+    verifyCert,
+  };
+}
