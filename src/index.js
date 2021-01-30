@@ -2,10 +2,8 @@
 
 // importing the dependencies
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const { rootStorage, uptime, updates, hostname } = require('./functions.js');
-const ssl = require('ssl-key-match');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
