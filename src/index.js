@@ -11,8 +11,6 @@ const randomstring = require('randomstring');
 // defining the Express app
 const app = express();
 
-const keyPem = fs.readFileSync('./secrets/server.key');
-
 const validateKey = async (req, res, next) => {
   await fs.readFile('./secrets/secrets.json', 'utf-8', (err, data) => {
     data = JSON.parse(data);
