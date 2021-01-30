@@ -7,6 +7,7 @@ const { rootStorage, uptime, updates, hostname } = require('./functions.js');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
+const bodyParser = require('body-parser');
 
 // defining the Express app
 const app = express();
@@ -26,13 +27,13 @@ const validateKey = async (req, res, next) => {
 
 // enabling CORS for all requests
 app.use(cors());
+app.use(bodyParser.json());
 
 app.post('/login', async (req, res) => {
+  console.log(req.body);
   fs.readFile('./secrets/secrets.json', 'utf-8', (err, data) => {
     const saltRounds = 10;
-    console.log(data);
     data = JSON.parse(data);
-
     const sentUser = req.body.username;
     const sentPass = req.body.password;
     const hashedPassword = bcrypt.hashSync(sentPass, saltRounds);
@@ -40,7 +41,8 @@ app.post('/login', async (req, res) => {
     // find index of user in data structure
     const userIndex = data.findIndex((user) => user.username === sentUser);
 
-    const allowNewUser = false;
+    const allowNewUser = true;
+
 
     if (userIndex === -1) { // if it doesn't exist
       if (allowNewUser) {
