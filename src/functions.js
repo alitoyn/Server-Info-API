@@ -1,4 +1,3 @@
-const ssl = require('ssl-key-match');
 const fs = require('fs')
 
 const shell = require('shelljs');
