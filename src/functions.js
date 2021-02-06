@@ -3,11 +3,18 @@ const fs = require('fs')
 const shell = require('shelljs');
 
 function rootStorage() {
-  // this bash returns:
-  // - percentage root storage
-  // - fractional representation
-  let data = shell.exec("df -h / | awk 'FNR == 2 {print $5 " + '" (" $3 " / " $2 ")"}' + "'");
-  return data;
+  const getPercentageStorage = "df -h / | awk 'FNR == 2 {print $5}'";
+  const getFractionalStorage = "df -h / | awk 'FNR == 2 {print" + '""$3 " / " $2 ""}' + "'";
+
+  const percent = shell.exec(getPercentageStorage).replace(/\n$/, "");
+  const fractional = shell.exec(getFractionalStorage).replace(/\n$/, "");;
+
+  const output = {
+    percent: percent,
+    fractional: fractional
+  };
+
+  return output;
 }
 
 function uptime() {
