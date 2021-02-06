@@ -18,8 +18,10 @@ function rootStorage() {
 }
 
 function uptime() {
-  let data = shell.exec('uptime');
-  return data;
+  const uptime = shell.exec('uptime').replace(/\n$/, "");
+  return {
+    uptime: uptime
+  };
 }
 
 function updates() {
