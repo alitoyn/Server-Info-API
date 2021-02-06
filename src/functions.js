@@ -31,20 +31,10 @@ function updates() {
 }
 
 function hostname() {
-  let data = shell.exec('hostname');
-  return data;
-}
-
-const verifyCert = (certPem) => {
-  const keyPem = fs.readFileSync('./secrets/server.key');
-
-  return ssl.match(certPem, keyPem, function (err, matches) {
-    if (matches) {
-      return true;
-    } else {
-      return false
-    }
-  });
+  const hostname = shell.exec('hostname').replace(/\n$/,"");
+  return {
+    hostname: hostname
+  };
 }
 
 if (typeof module !== 'undefined') {
@@ -53,6 +43,5 @@ if (typeof module !== 'undefined') {
     uptime,
     updates,
     hostname,
-    verifyCert,
   };
 }
