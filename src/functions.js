@@ -9,12 +9,10 @@ function rootStorage() {
   const percent = shell.exec(getPercentageStorage).replace(/\n$/, "");
   const fractional = shell.exec(getFractionalStorage).replace(/\n$/, "");;
 
-  const output = {
+  return {
     percent: percent,
     fractional: fractional
   };
-
-  return output;
 }
 
 function uptime() {
@@ -25,8 +23,11 @@ function uptime() {
 }
 
 function updates() {
-  let data = shell.exec('apt-get upgrade --dry-run | grep "newly install"');
-  return data;
+  const numberOfUpgrades = shell.exec('apt-get upgrade --dry-run | grep "newly install" | awk \'{print $1}\'').replace(/\n$/,"");
+  
+  return {
+    toUpgrade: numberOfUpgrades,
+      };
 }
 
 function hostname() {
